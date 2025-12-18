@@ -1,15 +1,6 @@
 #!/usr/bin/env python3
 """
-extract_fastlane_coords.py
-
 Extract centerline and optional wall coordinates from Assetto Corsa fast_lane.ai files.
-
-Usage examples:
-    python extract_fastlane_coords.py /path/to/fast_lane.ai -o out.csv --format csv --walls
-    python extract_fastlane_coords.py "tracks/*/ai/fast_lane.ai" --format json --subsample 5
-    C:/Python311/python.exe e:/Games/SteamLibrary/steamapps/common/assettocorsa/apps/python/kristex-app/fastlane_decoder.py fast_lane.ai -o mytrack.csv --format csv
-
-This code adapts the fast_lane.ai parsing approach used in create_png.py. See original file for reference. :contentReference[oaicite:1]{index=1}
 """
 import argparse
 import glob
@@ -31,7 +22,6 @@ class TrackDetailNode:
         self.id = rawIdeal[4]
         self.position = (rawIdeal[0], rawIdeal[1], rawIdeal[2])
         self.distance = rawIdeal[3]
-        # direction computed same as create_png: negative degrees from atan2 of prev->this delta
         self.direction = -math.degrees(
             math.atan2(prevRawIdeal[2] - self.position[1],
                        self.position[0] - prevRawIdeal[0])
